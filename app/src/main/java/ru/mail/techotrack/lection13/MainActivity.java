@@ -1,9 +1,12 @@
 package ru.mail.techotrack.lection13;
 
 import android.animation.TimeInterpolator;
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -13,15 +16,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
+		//Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		//setSupportActionBar(toolbar);
 
 		SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -162,6 +165,10 @@ public class MainActivity extends AppCompatActivity {
 					return new TransitionFragment();
 				case 7:
 					return new KeyFrameFragment();
+				case 8:
+					return new WebViewFragment();
+				case 9:
+					return new GifViewFragment();
 				default:
 					return null;
 			}
@@ -170,28 +177,32 @@ public class MainActivity extends AppCompatActivity {
 		@Override
 		public int getCount() {
 			// Show 3 total pages.
-			return 8;
+			return 10;
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
 			switch (position) {
 				case 0:
-					return ValueAnimationFragment.class.toString();
+					return "ValueAnimationFragment";
 				case 1:
-					return ObjectAnimationFragment.class.toString();
+					return "ObjectAnimationFragment";
 				case 2:
-					return ViewAnimationFragment.class.toString();
+					return "ViewAnimationFragment";
 				case 3:
-					return ResAnimationFragment.class.toString();
+					return "ResAnimationFragment";
 				case 4:
-					return Res2AnimationFragment.class.toString();
+					return "Res2AnimationFragment";
 				case 5:
-					return TransitionSimpleFragment.class.toString();
+					return "TransitionSimpleFragment";
 				case 6:
-					return TransitionFragment.class.toString();
+					return "TransitionFragment";
 				case 7:
-					return KeyFrameFragment.class.toString();
+					return "KeyFrameFragment";
+				case 8:
+					return "WebViewFragment";
+				case 9:
+					return "GifViewFragment";
 				default:
 					return "";
 			}

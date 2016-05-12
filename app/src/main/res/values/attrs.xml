@@ -15,4 +15,10 @@
         </attr>
         <attr name="factor" format="float" />
     </declare-styleable>
+
+    <declare-styleable name="GifView" >
+        <attr name="src" format="reference" />
+        <attr name="maxWidth" format="dimension"/>
+        <attr name="maxHeight" format="dimension" />
+    </declare-styleable>
 </resources>
