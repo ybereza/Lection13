@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn_change_scene"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change scene"
+        android:layout_gravity="center_horizontal" />
+
+    <FrameLayout
+        android:id="@+id/scene_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/scene1"/>
+
+    </FrameLayout>
+
+</LinearLayout>

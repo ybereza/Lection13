@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <translate xmlns:android="http://schemas.android.com/apk/res/android"
+        android:duration="200"
+        android:fromXDelta="-10"
+        android:fromYDelta="-40"
+        android:interpolator="@anim/cycle_7"
+        android:toXDelta="10"
+        android:toYDelta="40" />
+    <!--<scale xmlns:android="http://schemas.android.com/apk/res/android"
+        android:duration="200"
+        android:fromXScale="0.7"
+        android:fromYScale="0.7"
+        android:interpolator="@anim/cycle_7"
+        android:toXScale="1.3"
+        android:toYScale="1.3"
+        />-->
