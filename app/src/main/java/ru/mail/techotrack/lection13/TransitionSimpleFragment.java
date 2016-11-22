@@ -2,18 +2,15 @@ package ru.mail.techotrack.lection13;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.MotionEventCompat;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 public class TransitionSimpleFragment extends ColorFragment{
+	private boolean scaled;
 
 	public TransitionSimpleFragment() {
 		super();
@@ -24,53 +21,30 @@ public class TransitionSimpleFragment extends ColorFragment{
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 		final View rootView = inflater.inflate(R.layout.view_animation_fragment, container, false);
+		final ViewGroup layout = (ViewGroup)rootView.findViewById(R.id.container);
 		final View button = rootView.findViewById(R.id.test_button);
-		final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
 
-		final ScaleGestureDetector detector = new ScaleGestureDetector(getContext(), new ScaleGestureDetector.SimpleOnScaleGestureListener() {
+		scaled = false;
+
+		button.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public boolean onScale(ScaleGestureDetector detector) {
-				TransitionManager.beginDelayedTransition((ViewGroup)rootView);
+			public void onClick(View v) {
+				TransitionManager.beginDelayedTransition(layout);
+
 				ViewGroup.LayoutParams params = button.getLayoutParams();
-				if (detector.getScaleFactor() > 1) {
-					params.width = 600;
-					params.height = 600;
-				} else {
-					params.width = 200;
-					params.height = 200;
+				if (!scaled) {
+					Log.e("Animations", "Inc");
+					params.width = (int)(params.width * 1.5);
+					params.height = (int)(params.height * 1.5);
 				}
-				button.setLayoutParams(params);
-				return true;
-			}
-		});
+				else {
+					Log.e("Animations", "Dec");
+					params.width = (int)(params.width / 1.5);
+					params.height = (int)(params.height / 1.5);
+				}
 
-		final GestureDetector detector1 = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
-			@Override
-			public boolean onDoubleTap(MotionEvent e) {
-				TransitionManager.beginDelayedTransition((ViewGroup)rootView);
-				ViewGroup.LayoutParams params = button.getLayoutParams();
-				params.width = 600;
-				params.height = 600;
+				scaled = !scaled;
 				button.setLayoutParams(params);
-				return true;
-			}
-
-			@Override
-			public void onLongPress(MotionEvent e) {
-				TransitionManager.beginDelayedTransition((ViewGroup)rootView);
-				ViewGroup.LayoutParams params = button.getLayoutParams();
-				params.width = 200;
-				params.height = 200;
-				button.setLayoutParams(params);
-			}
-		});
-
-		button.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				detector.onTouchEvent(event);
-				detector1.onTouchEvent(event);
-				return true;
 			}
 		});
 
