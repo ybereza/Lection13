@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.transition.TransitionManager;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 public class TransitionSimpleFragment extends ColorFragment{
 	private boolean scaled;
@@ -31,16 +31,22 @@ public class TransitionSimpleFragment extends ColorFragment{
 			public void onClick(View v) {
 				TransitionManager.beginDelayedTransition(layout);
 
-				ViewGroup.LayoutParams params = button.getLayoutParams();
+				RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)button.getLayoutParams();
 				if (!scaled) {
-					Log.e("Animations", "Inc");
 					params.width = (int)(params.width * 1.5);
 					params.height = (int)(params.height * 1.5);
+					params.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+					params.removeRule(RelativeLayout.ALIGN_PARENT_END);
+					params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+					params.addRule(RelativeLayout.ALIGN_PARENT_START);
 				}
 				else {
-					Log.e("Animations", "Dec");
 					params.width = (int)(params.width / 1.5);
 					params.height = (int)(params.height / 1.5);
+					params.removeRule(RelativeLayout.ALIGN_PARENT_TOP);
+					params.removeRule(RelativeLayout.ALIGN_PARENT_START);
+					params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+					params.addRule(RelativeLayout.ALIGN_PARENT_END);
 				}
 
 				scaled = !scaled;
